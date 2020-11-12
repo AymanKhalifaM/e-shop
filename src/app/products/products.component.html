@@ -1,26 +1,28 @@
-<div class="container ">
-    <div class="row">
-      <div class="col-md-3">
-        <ul class="list-group" *ngFor="let item of cat">
-          <li class="list-group-item">
-            {{ item.name }}
-          </li>
-        </ul>
-      </div>
-        <div class="col-md-3 col-offset-3 mt-2 " *ngFor="let product of products">
-            <div class="card text-dark moka">
-              <img *ngIf="product.imageUrl" height="auto" class="card-img-top" [src]="product.imageUrl" alt="{{ product.title}}">
-              <video class="card-img-top" width="auto"  autoplay loop *ngIf="product.video ">
-                <source [src]="product.video" type="video/mp4">
-              </video>
-              <div class="card-body">
-                <h4 class="card-title">{{ product.title }}</h4>
-                <p class="card-text">{{ product.price }}</p>
-                <p class="card-text">{{ product.category }}</p>
-                <a href="" class="btn btn-success">Add to Cart</a>
-              </div>
-            </div>
-        </div>
+<div class="container">
+  <div class="row">
+    <div class="col-md-3 ">
+      <ul class="list-group sticky-top">
+        <a routerLink="/" [class.active]="!catFilter" class="list-group-item list-group-item-action">All Categories</a>
+        <a
+          class="list-group-item list-group-item-action"
+          *ngFor="let item of cat"
+          routerLink="/"
+          [queryParams]="{cat:item.name}"
+          [class.active]="catFilter === item.name"
+        >
+          {{ item.name }}
+        </a>
+      </ul>
     </div>
+    <div class="col">
+      <div class="row">
+        <ng-container *ngFor="let product of products | filter:catFilter">
+          <div class="col-md-6  col-xl-3 mt-2" >
+            <app-product-card [products]="product" [check]="true"></app-product-card>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+ 
+  </div>
 </div>
-

@@ -1,0 +1,22 @@
+<button routerLink="/my-products/new-product" class="btn btn-dark">New Product</button>
+<input type="text" [(ngModel)]="sarchData" class="form-control m-2" placeholder="search here ..">
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th scope="col">#</th>
+    <th scope="col">title</th>
+    <th scope="col">Price</th>
+    <th scope="col">Edit</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let product of products | filter:sarchData; index as i">
+    <th scope="row">{{ i + 1 }}</th>
+    <td>{{ product.title  }}</td>
+    <td>{{ product.price | currency:'USD'  }}</td>
+    <td>
+        <a [routerLink]="['new-product/',product.id]">Edit</a>
+    </td>
+  </tr>
+  </tbody>
+</table>

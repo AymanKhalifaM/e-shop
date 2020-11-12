@@ -1,0 +1,127 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <form (ngSubmit)="saveProduct(form.value)" #form="ngForm">
+        <div class="form-group">
+          <label for="title">title</label>
+          <input
+            class="form-control"
+            type="text"
+            name="title"
+            id="title"
+            [(ngModel)]="product.title"
+            required
+            #title="ngModel"
+          />
+        </div>
+        <div class="alert alert-danger" *ngIf="title.touched && title.invalid">
+          <span>You Should Enter Title</span>
+        </div>
+        <div class="form-group">
+          <label for="price">price</label>
+          <input
+            class="form-control"
+            type="number"
+            name="price"
+            id="price"
+            [(ngModel)]="product.price"
+            required
+            #price="ngModel"
+            [min]=0
+          />
+        </div>
+        <div class="alert alert-danger" *ngIf="price.touched && price.invalid">
+          <span>You Should Enter Price</span>
+        </div>
+        <div class="form-group">
+          <label for="imageUrl">image Url</label>
+          <input
+            class="form-control"
+            type="text"
+            name="imageUrl"
+            id="imageUrl"
+            [(ngModel)]="product.imageUrl"
+            #imageUrl="ngModel"
+            required
+            [disabled]="video.valid"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="video">Video Url</label>
+          <input
+            class="form-control"
+            type="text"
+            name="video"
+            id="video"
+            [(ngModel)]="product.video"
+            required
+            #video="ngModel"
+            [disabled]="imageUrl.valid"
+          />
+        </div>
+        <div
+          class="alert alert-danger"
+          *ngIf="
+            (imageUrl.touched && imageUrl.invalid) ||
+            (video.touched && video.invalid)
+          "
+        >
+          <span>You Should Enter image or Video Url</span>
+        </div>
+        <div class="form-group">
+          <label for="category">category</label>
+          <select
+            [(ngModel)]="product.category"
+            name="category"
+            id="category"
+            class="form-control"
+            #category="ngModel"
+          >
+            <option *ngFor="let item of cat" value="{{ item.name }}">
+              {{ item.name }}
+            </option>
+          </select>
+        </div>
+        <div
+          class="alert alert-danger"
+          *ngIf="category.touched && category.invalid"
+        >
+          <span>You Should Choose category</span>
+        </div>
+        <button type="submit" class="btn btn-dark">Save Product</button>
+        <button (click)="removeProduct()" class="btn btn-danger ml-2">
+          Delete Product
+        </button>
+      </form>
+    </div>
+    <div class="col-md-6 mt-4">
+        <!-- 
+                  <div class="card" style="width: 18rem" *ngIf="title.value">
+        <img
+          class="card-img-top"
+          *ngIf="imageUrl.value"
+          [src]="imageUrl.value"
+        />
+        <video
+          class="card-img-top"
+          width="auto"
+          autoplay
+          loop
+          *ngIf="video.value"
+        >
+          <source [src]="video.value" type="video/mp4" />
+        </video>
+        <div class="card-body">
+          <h5 class="card-title">{{ title.value }}</h5>
+          <p class="card-text">{{ price.value | currency: "USD" }}</p>
+          <p class="card-text">{{ category.value }}</p>
+          <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+        <!-- </div>
+    </div> -->
+
+         -->
+        <app-product-card [products]="form.value"></app-product-card>
+    </div>
+  </div>
+</div>
