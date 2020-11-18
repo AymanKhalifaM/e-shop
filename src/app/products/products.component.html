@@ -18,8 +18,16 @@
       <div class="row">
         <ng-container *ngFor="let product of products | filter:catFilter">
           <div class="col-md-6  col-xl-3 mt-2" >
-            <app-product-card [products]="product" [check]="true"></app-product-card>
+             <ng-container *ngIf="!spinner">
+              <app-product-card [products]="product" [check]="true"></app-product-card>
+             </ng-container>
           </div>
+        </ng-container>
+        <ng-container *ngIf="spinner && !errorMessage">
+          <mat-spinner color="accent" class="m-5"></mat-spinner>
+        </ng-container>
+        <ng-container *ngIf="errorMessage">
+          <h3 class="alert alert-danger">{{ errorMessage }}</h3>
         </ng-container>
       </div>
     </div>

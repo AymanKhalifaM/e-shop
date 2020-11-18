@@ -6,6 +6,7 @@
       [src]="products.imageUrl"
       alt="{{ products.title }}"
     />
+    
     <video
       class="card-img-top"
       width="auto"
@@ -15,10 +16,14 @@
     >
       <source [src]="products.video" type="video/mp4" />
     </video>
+    <mat-spinner color="accent" class="m-5" *ngIf="(!products.imageUrl && !products.video) && noData "></mat-spinner>
+    <h3 *ngIf="!noData && (!products.imageUrl && !products.video)" class="alert-danger">No image or video here</h3>
     <div class="card-body">
       <h4 class="card-title">{{ products.title }}</h4>
       <p class="card-text">{{ products.price }}</p>
       <p class="card-text">{{ products.category }}</p>
-      <a href="" class="btn btn-success" *ngIf="check">Add to Cart</a>
     </div>
+    <a href="" class="btn btn-dark" *ngIf="check">Add to Cart</a>
   </div>
+
+ 

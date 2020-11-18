@@ -10,9 +10,13 @@ import { ProductsService } from '../shared/get-products.service';
 export class ProductCardComponent implements OnInit {
   @Input() products:Product;
   @Input() check:Boolean =false;
+  noData:boolean =true;
   constructor(private productSer:ProductsService) { }
 
   ngOnInit() {
+    setInterval(()=>{
+      this.noData = false;
+    },8000)
     
   }
 

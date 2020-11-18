@@ -17,6 +17,7 @@ import { MyProductsComponent } from './my-products/my-products.component';
 import { NewProductComponent } from './new-product/new-product.component';
 import { FormsModule } from '@angular/forms';
 import { ProductCardComponent } from './product-card/product-card.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 
 @NgModule({
@@ -38,7 +39,8 @@ import { ProductCardComponent } from './product-card/product-card.component';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     Ng2SearchPipeModule,
-    FormsModule
+    FormsModule,
+    MatProgressSpinnerModule
 
      
   ],

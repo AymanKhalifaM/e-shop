@@ -10,12 +10,16 @@ import { Component, OnInit } from '@angular/core';
 export class MyProductsComponent implements OnInit {
   products:Product[]=[];
   sarchData:string;
+  errorMessage:string;
   constructor(private prodService:ProductsService) { }
 
   ngOnInit() {
     this.prodService.getAllProudcts().subscribe((prod:Product[])=>{
       this.products = prod;
-    })
+    }  ,error=>{
+      this.errorMessage = error.message;
+      console.log(this.errorMessage)
+     })
   }
 
 }

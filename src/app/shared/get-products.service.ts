@@ -22,8 +22,8 @@ constructor(private db:AngularFireDatabase) { }
     return this.db.object('/products/'+productId).remove()
   }
 
-  getProductById(productId){
-    return this.db.object<Product>('/products/'+productId).valueChanges().pipe(take(1))
+  getProductById(productId:string){
+    return this.db.object('/products/'+productId).valueChanges().pipe(take(1));
   }
 
 

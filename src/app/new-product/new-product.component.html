@@ -1,7 +1,11 @@
+<ng-container *ngIf="errorMessage">
+  <h1 class="alert alert-danger">{{ errorMessage }}</h1>
+</ng-container>
+<ng-container *ngIf="!errorMessage && !spinner">
 <div class="container">
   <div class="row">
-    <div class="col-md-6">
-      <form (ngSubmit)="saveProduct(form.value)" #form="ngForm">
+    <div class="col-md-6" >
+      <form (ngSubmit)="saveProduct(form.value)" #form="ngForm" >
         <div class="form-group">
           <label for="title">title</label>
           <input
@@ -12,6 +16,7 @@
             [(ngModel)]="product.title"
             required
             #title="ngModel"
+            
           />
         </div>
         <div class="alert alert-danger" *ngIf="title.touched && title.invalid">
@@ -89,39 +94,21 @@
         >
           <span>You Should Choose category</span>
         </div>
-        <button type="submit" class="btn btn-dark">Save Product</button>
+        <button type="submit" class="btn btn-dark" [disabled]="!form.valid">Save Product</button>
         <button (click)="removeProduct()" class="btn btn-danger ml-2">
           Delete Product
         </button>
       </form>
     </div>
-    <div class="col-md-6 mt-4">
-        <!-- 
-                  <div class="card" style="width: 18rem" *ngIf="title.value">
-        <img
-          class="card-img-top"
-          *ngIf="imageUrl.value"
-          [src]="imageUrl.value"
-        />
-        <video
-          class="card-img-top"
-          width="auto"
-          autoplay
-          loop
-          *ngIf="video.value"
-        >
-          <source [src]="video.value" type="video/mp4" />
-        </video>
-        <div class="card-body">
-          <h5 class="card-title">{{ title.value }}</h5>
-          <p class="card-text">{{ price.value | currency: "USD" }}</p>
-          <p class="card-text">{{ category.value }}</p>
-          <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
-        <!-- </div>
-    </div> -->
-
-         -->
+    <div class="col-md-6 mt-4" *ngIf="product.title || product.imageUrl || product.video">
         <app-product-card [products]="form.value"></app-product-card>
     </div>
   </div>
 </div>
+</ng-container>
+
+<ng-container *ngIf="spinner">
+  <mat-spinner  color="accent" class="spinner"></mat-spinner>
+</ng-container>
+
+
