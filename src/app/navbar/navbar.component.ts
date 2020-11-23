@@ -1,3 +1,4 @@
+import { AuthService } from './../auth/auth.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
   isMenuCollapsed = true;
-  constructor() { }
+  user;
+  constructor(private auhtService:AuthService) { }
 
   ngOnInit() {
+    this.auhtService.user.subscribe(user=>{
+      this.user=user;
+      console.log(user)
+    })
   }
+
+  logout(){
+    this.isMenuCollapsed = true;
+    this.auhtService.logout()
+  }
+
 
 }

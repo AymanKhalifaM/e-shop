@@ -1,3 +1,6 @@
+import { AuthGuardService } from './auth/auth-guard.service';
+import { SingupComponent } from './singup/singup.component';
+import { LoginComponent } from './login/login.component';
 import { NewProductComponent } from './new-product/new-product.component';
 import { MyProductsComponent } from './my-products/my-products.component';
 import { ProductsComponent } from './products/products.component';
@@ -6,11 +9,24 @@ import { Routes, RouterModule } from '@angular/router';
 
 
 const routes: Routes = [
-  {path:"",component:ProductsComponent},
-  {path:"my-products/new-product",component:NewProductComponent},
-  {path:"my-products/new-product/:id",component:NewProductComponent},
-  {path:"my-products",component:MyProductsComponent},
-  
+  { path: "", component: ProductsComponent },
+  { path: "signup", component: SingupComponent },
+  { path: "login", component: LoginComponent },
+  {
+    path: "my-products/new-product",
+    component: NewProductComponent,
+    canActivate: [AuthGuardService],
+  },
+  {
+    path: "my-products/new-product/:id",
+    component: NewProductComponent,
+    canActivate: [AuthGuardService],
+  },
+  {
+    path: "my-products",
+    component: MyProductsComponent,
+    canActivate: [AuthGuardService],
+  },
 ];
 
 @NgModule({

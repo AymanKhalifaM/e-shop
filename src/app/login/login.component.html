@@ -1,0 +1,48 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <form #form="ngForm" (ngSubmit)="login(form.value)">
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input
+            type="text"
+            name="email"
+            id="email"
+            class="form-control"
+            ngModel
+            required
+            email
+          />
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input
+            type="password"
+            name="password"
+            id="password"
+            class="form-control"
+            ngModel
+            required
+          />
+        </div>
+
+        <button class="btn btn-success mt-3 mr-3" type="submit">Login</button>
+        <button class="btn btn-dark mt-3" (click)="goToSignUp()">Signup</button>
+      </form>
+      <h2 class="alert alert-danger mt-3" *ngIf="errMessage">{{ errMessage }}</h2>
+      <!-- social login -->
+      <div class="mt-5">
+        <button class="btn btn-primary" (click)="loginWithFacebook()">
+          Facebook login
+        </button>
+        ||
+        <button class="btn btn-primary" (click)="loginWithGoogle()">
+          Google login
+        </button>
+
+        <!-- <p *ngIf="user">{{ user.name }}</p> -->
+        <!-- <img [src]="user.picture" *ngIf="user.picture" alt=""> -->
+      </div>
+    </div>
+  </div>
+</div>

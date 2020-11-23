@@ -18,7 +18,9 @@ import { NewProductComponent } from './new-product/new-product.component';
 import { FormsModule } from '@angular/forms';
 import { ProductCardComponent } from './product-card/product-card.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
-
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { LoginComponent } from './login/login.component';
+import { SingupComponent } from './singup/singup.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,9 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     ProductsComponent,
     MyProductsComponent,
     NewProductComponent,
-    ProductCardComponent
+    ProductCardComponent,
+    LoginComponent,
+    SingupComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +44,9 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     AngularFireDatabaseModule,
     Ng2SearchPipeModule,
     FormsModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    AngularFireAuthModule
+    
 
      
   ],
