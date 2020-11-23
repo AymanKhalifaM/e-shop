@@ -13,15 +13,16 @@ const routes: Routes = [
   { path: "signup", component: SingupComponent },
   { path: "login", component: LoginComponent },
   {
-    path: "my-products/new-product",
-    component: NewProductComponent,
-    canActivate: [AuthGuardService],
-  },
-  {
     path: "my-products/new-product/:id",
     component: NewProductComponent,
     canActivate: [AuthGuardService],
   },
+  {
+    path: "my-products/new-product",
+    component: NewProductComponent,
+    canActivate: [AuthGuardService],
+  },
+
   {
     path: "my-products",
     component: MyProductsComponent,

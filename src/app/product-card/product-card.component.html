@@ -23,7 +23,7 @@
       <p class="card-text">{{ products.price }}</p>
       <p class="card-text">{{ products.category }}</p>
     </div>
-    <a href="" class="btn btn-dark" *ngIf="check">Add to Cart</a>
+    <button href="" class="btn btn-dark" *ngIf="check" (click)="addToCart(products)">Add to Cart</button> 
   </div>
 
  
