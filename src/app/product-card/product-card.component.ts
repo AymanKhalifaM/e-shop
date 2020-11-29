@@ -1,7 +1,7 @@
-import { CartServiceService } from './../shared/cartService.service';
-import { Product } from './../shared/product.modle';
-import { Component, Input, OnInit } from '@angular/core';
-import { ProductsService } from '../shared/get-products.service';
+import { CartServiceService } from "./../shared/cartService.service";
+import { Product } from "./../shared/product.modle";
+import { Component, Input, OnInit } from "@angular/core";
+import { ProductsService } from "../shared/get-products.service";
 
 @Component({
   selector: "app-product-card",
@@ -12,15 +12,17 @@ export class ProductCardComponent implements OnInit {
   @Input() products: Product;
   @Input() check: Boolean = false;
   noData: boolean = true;
-  constructor(private productSer: ProductsService , private cartService:CartServiceService) {}
-
+  constructor(
+    private productSer: ProductsService,
+    private cartService: CartServiceService
+  ) {}
   ngOnInit() {
     setInterval(() => {
       this.noData = false;
     }, 8000);
   }
 
-  addToCart(product){
-    this.cartService.addToCart(product); // here 
+  addToCart(product: Product) {
+    this.cartService.addToCart(product);
   }
 }
