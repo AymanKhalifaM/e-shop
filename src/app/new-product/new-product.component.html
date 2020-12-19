@@ -16,7 +16,7 @@
             [(ngModel)]="product.title"
             required
             #title="ngModel"
-            
+
           />
         </div>
         <div class="alert alert-danger" *ngIf="title.touched && title.invalid">
@@ -110,5 +110,6 @@
 <ng-container *ngIf="spinner">
   <mat-spinner  color="accent" class="spinner"></mat-spinner>
 </ng-container>
+
 
 

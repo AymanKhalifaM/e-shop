@@ -3,13 +3,8 @@
     <div class="col-md-3 ">
       <ul class="list-group sticky-top">
         <a routerLink="/" [class.active]="!catFilter" class="list-group-item list-group-item-action">All Categories</a>
-        <a
-          class="list-group-item list-group-item-action"
-          *ngFor="let item of cat"
-          routerLink="/"
-          [queryParams]="{cat:item.name}"
-          [class.active]="catFilter === item.name"
-        >
+        <a class="list-group-item list-group-item-action" *ngFor="let item of cat" routerLink="/"
+          [queryParams]="{cat:item.name}" [class.active]="catFilter === item.name">
           {{ item.name }}
         </a>
       </ul>
@@ -17,10 +12,10 @@
     <div class="col">
       <div class="row">
         <ng-container *ngFor="let product of products | filter:catFilter">
-          <div class="col-md-6  col-xl-3 mt-2" >
-             <ng-container *ngIf="!spinner">
-              <app-product-card [products]="product" [check]="true"></app-product-card>
-             </ng-container>
+          <div class="col-md-6  col-xl-3 mt-2">
+            <ng-container *ngIf="!spinner">
+              <app-product-card [products]="product" [shoppingCart]="cart" [check]="true"></app-product-card>
+            </ng-container>
           </div>
         </ng-container>
         <ng-container *ngIf="spinner && !errorMessage">
@@ -31,6 +26,6 @@
         </ng-container>
       </div>
     </div>
- 
+
   </div>
 </div>

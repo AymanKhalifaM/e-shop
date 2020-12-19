@@ -1,9 +1,11 @@
+import { CartServiceService } from './../shared/cartService.service';
 import { GetCategoryService } from './../shared/get-category.service';
 import { Product } from './../shared/product.modle';
 import { ProductsService } from './../shared/get-products.service';
 import { Component, OnInit } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
@@ -11,37 +13,52 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ProductsComponent implements OnInit {
 
-  products:Product [] = [];
+  products: Product[] = [];
   cat = [];
   catFilter;
-  spinner:boolean = true ;
+  spinner: boolean = true;
   errorMessage;
+  cart: any;
+  carSubscriptin: Subscription;
 
-  constructor(private productSer:ProductsService , private route:ActivatedRoute , private catService:GetCategoryService) { }
+  constructor(private productSer: ProductsService, private route: ActivatedRoute, private catService: GetCategoryService, private cartService: CartServiceService) {
 
-  ngOnInit() {
-    this.route.queryParamMap.subscribe(param=>{
-      this.catFilter = param.get('cat') ; 
+  }
+
+  async ngOnInit() {
+    this.carSubscriptin = (await this.cartService.getCart()).valueChanges().subscribe(cart => this.cart = cart);
+
+
+    this.route.queryParamMap.subscribe(param => {
+      this.catFilter = param.get('cat');
       console.log(this.catFilter)
     })
 
-    this.productSer.getAllProudcts().subscribe((d:Product[])=>{
-      this.products = d ;
+    this.productSer.getAllProudcts().subscribe((d: Product[]) => {
+      this.products = d;
       this.spinner = false;
       console.log(this.products)
-    },error=>{
-     this.errorMessage = error.message;
-     console.log(this.errorMessage)
-    })
-
-    this.catService.getCategories().subscribe(data=>{
-      console.log(data);
-      this.cat = data ;
-    },error=>{
+    }, error => {
       this.errorMessage = error.message;
       console.log(this.errorMessage)
-     })
-    
+    })
+
+    this.catService.getCategories().subscribe(data => {
+      console.log(data);
+      this.cat = data;
+    }, error => {
+      this.errorMessage = error.message;
+      console.log(this.errorMessage)
+    })
+
+
+
+  }
+
+  ngOnDestroy(): void {
+    //Called once, before the instance is destroyed.
+    //Add 'implements OnDestroy' to the class.
+    this.carSubscriptin.unsubscribe()
   }
 
 }

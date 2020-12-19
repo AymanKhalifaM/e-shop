@@ -14,6 +14,10 @@ export class CarouselComponent implements OnInit {
   }
 
   customOptions: OwlOptions = {
+    autoplay: true,
+    autoplayHoverPause: true,
+    autoplaySpeed: 320,
+    autoWidth: true,
     loop: true,
     mouseDrag: true,
     touchDrag: true,

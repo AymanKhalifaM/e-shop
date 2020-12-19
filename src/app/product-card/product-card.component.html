@@ -1,29 +1,38 @@
-<div class="card text-dark  mt-2" >
-    <img
-      *ngIf="products.imageUrl"
-      height="auto"
-      class="card-img-top"
-      [src]="products.imageUrl"
-      alt="{{ products.title }}"
-    />
-    
-    <video
-      class="card-img-top"
-      width="auto"
-      autoplay
-      loop
-      *ngIf="products.video"
-    >
-      <source [src]="products.video" type="video/mp4" />
-    </video>
-    <mat-spinner color="accent" class="m-5" *ngIf="(!products.imageUrl && !products.video) && noData "></mat-spinner>
-    <h3 *ngIf="!noData && (!products.imageUrl && !products.video)" class="alert-danger">No image or video here</h3>
-    <div class="card-body">
-      <h4 class="card-title">{{ products.title }}</h4>
-      <p class="card-text">{{ products.price }}</p>
-      <p class="card-text">{{ products.category }}</p>
-    </div>
-    <button href="" class="btn btn-dark" *ngIf="check" (click)="addToCart(products)">Add to Cart</button> 
-  </div>
+<div class="card text-dark mt-2">
+  <img *ngIf="products.imageUrl" height="auto" class="card-img-top" [src]="products.imageUrl"
+    alt="{{ products.title }}" />
 
- 
+  <video class="card-img-top" width="auto" autoplay loop *ngIf="products.video">
+    <source [src]="products.video" type="video/mp4" />
+  </video>
+  <mat-spinner color="accent" class="m-5" *ngIf="!products.imageUrl && !products.video && noData"></mat-spinner>
+  <h3 *ngIf="!noData && !products.imageUrl && !products.video" class="alert-danger">
+    No image or video here
+  </h3>
+  <div class="card-body">
+    <h4 class="card-title">{{ products.title }}</h4>
+    <p class="card-text">{{ products.price }}</p>
+    <p class="card-text">{{ products.category }}</p>
+  </div>
+  <div *ngIf="check">
+    <button *ngIf="quantity() === 0 ; else addOrRemoveItem" class="btn-block btn-dark" (click)="addToCart()">
+      Add to Cart
+    </button>
+    <ng-template #addOrRemoveItem>
+      <div class="row no-gutters">
+        <div class="col-2">
+          <button class="btn btn-block btn-dark" (click)="removeFromCart()">-</button>
+        </div>
+        <div class="col-8 text-center text-success">
+          <div>
+            {{ quantity() }}
+          </div>
+        </div>
+        <div class="col-2">
+          <button class="btn btn-block btn-dark" (click)="addToCart()">+</button>
+        </div>
+      </div>
+    </ng-template>
+
+  </div>
+</div>
