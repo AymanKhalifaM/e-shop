@@ -1,68 +1,33 @@
 <nav class="navbar navbar-expand-lg navbar-light">
   <a class="navbar-brand" routerLink="/">Shoe Shop</a>
-  <button
-    class="navbar-toggler"
-    type="button"
-    data-toggle="collapse"
-    data-target="#navbarSupportedContent"
-    aria-controls="navbarSupportedContent"
-    aria-expanded="false"
-    aria-label="Toggle navigation"
-    (click)="isMenuCollapsed = !isMenuCollapsed"
-  >
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
+    (click)="isMenuCollapsed = !isMenuCollapsed">
     <span class="navbar-toggler-icon"></span>
   </button>
 
-  <div
-    [ngbCollapse]="isMenuCollapsed"
-    class="collapse navbar-collapse"
-    id="navbarSupportedContent"
-  >
+  <div [ngbCollapse]="isMenuCollapsed" class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav ml-auto">
-      <li class="nav-item active">
-        <a class="nav-link" routerLink="/" (click)="isMenuCollapsed = true"
-          >Home <span class="sr-only">(current)</span></a
-        >
+      <li class="nav-item ">
+        <a class="nav-link" routerLink="/" (click)="isMenuCollapsed = true">Home</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" (click)="isMenuCollapsed = true" *ngIf="user">Cart</a>
+        <a class="nav-link" routerLink="/cart" (click)="isMenuCollapsed = true">Cart <span *ngIf="count !== 0"
+            class="badge bg-success rounded-pill">{{ count }}</span></a>
       </li>
       <li class="nav-item">
-        <a
-          class="nav-link"
-          routerLink="/login"
-          *ngIf="!user"
-          (click)="isMenuCollapsed = true"
-          >Login</a
-        >
+        <a class="nav-link" routerLink="/login" *ngIf="!user" (click)="isMenuCollapsed = true">Login</a>
       </li>
       <li class="nav-item">
-        <a
-          class="nav-link"
-          routerLink="/signup"
-          *ngIf="!user"
-          (click)="isMenuCollapsed = true"
-          >Signup</a
-        >
+        <a class="nav-link" routerLink="/signup" *ngIf="!user" (click)="isMenuCollapsed = true">Signup</a>
       </li>
       <li class="nav-item dropdown" ngbDropdown *ngIf="user">
-        <a
-          class="nav-link dropdown-toggle"
-          id="navbarDropdown"
-          role="button"
-          data-toggle="dropdown"
-          aria-haspopup="true"
-          aria-expanded="false"
-          ngbDropdownToggle
-        >
+        <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false" ngbDropdownToggle>
           {{ user.displayName || user.email }}
           <img [src]="user.photoURL" *ngIf="user.photoURL" class="img-user" alt="">
         </a>
-        <div
-          class="dropdown-menu"
-          ngbDropdownMenu
-          aria-labelledby="navbarDropdown"
-        >
+        <div class="dropdown-menu" ngbDropdownMenu aria-labelledby="navbarDropdown">
           <a class="dropdown-item" routerLink="/my-products">My Products</a>
           <a class="dropdown-item" (click)="logout()">Logout</a>
         </div>

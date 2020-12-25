@@ -21,6 +21,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { LoginComponent } from './login/login.component';
 import { SingupComponent } from './singup/singup.component';
+import { CartComponent } from './cart/cart.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { SingupComponent } from './singup/singup.component';
     NewProductComponent,
     ProductCardComponent,
     LoginComponent,
-    SingupComponent
+    SingupComponent,
+    CartComponent
   ],
   imports: [
     BrowserModule,
